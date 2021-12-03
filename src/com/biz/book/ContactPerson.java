@@ -32,12 +32,12 @@ public class ContactPerson {
 
     public void updatedata(String name, ArrayList<ContactPerson> record) {
         for(int i=0;i<record.size();i++) {
-            System.out.println(record.get(i).firstName);
             if (name.equals(record.get(i).firstName)) {
                 record.remove(i);
                 record.add(i, getInput());
             }
     }
+        System.out.println("Record Update Successfully.......");
 }
 
     public ContactPerson getInput() {
@@ -60,4 +60,17 @@ public class ContactPerson {
         addressBookMain1.emailId = sc.next();
         return addressBookMain1;
     }
+
+    public void deleteRecord(String name, ArrayList<ContactPerson> record) {
+        if(record.size()>0) {
+            for (int i = 0; i < record.size(); i++) {
+                if (name.equals(record.get(i).firstName)) {
+                    record.remove(i);
+                }
+                else System.out.println("There is no any person contact for "+name);
+            }
+        }
+        else System.out.println("There is no any person address to delete");
+        System.out.println("Record Delete Successfully.......");
     }
+}
