@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBookMain {
-
-
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
         ContactPerson contactPerson = new ContactPerson();
@@ -19,7 +17,6 @@ public class AddressBookMain {
             System.out.print("1 - Add more contact \n2 - Edit Contact \n3 - Delete person Contact \n4 - Show AddressBook "+
                     "\n0 -  for exit \nEnter your Choice.....");
             status = sc.nextInt();
-
             switch (status) {
                 case 1:
                     record.add(contactPerson.getInput());
