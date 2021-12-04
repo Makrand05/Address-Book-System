@@ -6,7 +6,7 @@ public class AddressBook {
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
         ContactPerson contactPerson = new ContactPerson();
-
+        Map<String, ContactPerson> addressBookHashMap = new HashMap<>();// for unique name and contact
         ArrayList<ContactPerson> record = new ArrayList<>();
         String name="";
         int index=0;
@@ -20,7 +20,7 @@ public class AddressBook {
             switch (status) {
                 case 1:
                     record.add(contactPerson.getInput());//adding the new contact in address book
-
+                    addressBookHashMap.put(record.get(index).firstName, record.get(index++)); // store address book as per first name
                     break;
                 case 2:
                     System.out.println("Enter first name that you want to edit record");
@@ -41,7 +41,7 @@ public class AddressBook {
                     break;
             }
         }
-
+        contactPerson.getAddressbook(addressBookHashMap);//print add address book
 
     }
 
