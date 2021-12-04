@@ -1,6 +1,8 @@
 package com.biz.book;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ContactPerson {
@@ -14,10 +16,12 @@ public class ContactPerson {
 
     public ContactPerson() {
 
+
     }
 
     public void addressBook(ArrayList<ContactPerson> contactPerson) {
         for(int j=0;j<contactPerson.size();j++) {
+
             System.out.println("------------------------------------------------");
             System.out.println("First Name : " + contactPerson.get(j).firstName);
             System.out.println("Last Name : " + contactPerson.get(j).lastName);
@@ -27,6 +31,7 @@ public class ContactPerson {
             System.out.println("Phone Number : " + contactPerson.get(j).phoneNumber);
             System.out.println("Email id : " + contactPerson.get(j).emailId);
             System.out.println("------------------------------------------------");
+
         }
     }
 
@@ -66,11 +71,40 @@ public class ContactPerson {
             for (int i = 0; i < record.size(); i++) {
                 if (name.equals(record.get(i).firstName)) {
                     record.remove(i);
+                    System.out.println("Record Delete Successfully.......");
                 }
                 else System.out.println("There is no any person contact for "+name);
             }
         }
         else System.out.println("There is no any person address to delete");
-        System.out.println("Record Delete Successfully.......");
+
+    }
+
+    public Dictionary<String, ContactPerson> getInput(Dictionary<String, ContactPerson> dictionary) {
+        ContactPerson contactPerson=new ContactPerson();
+        System.out.println("Enter Name for dictionary");
+        String s=(new Scanner(System.in)).next();
+        dictionary.put(s,contactPerson.getInput());
+        return dictionary;
+    }
+
+
+    public void getAddressbook(Map<String, ContactPerson> addressBookHashMap) {
+        for(String addressbook:addressBookHashMap.keySet()){
+            System.out.println("Person contact for the "+addressbook.toString()+" is "+addressBookHashMap.get(addressbook).toString());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "ContactPerson{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", zip=" + zip +
+                ", phoneNumber=" + phoneNumber +
+                ", emailId='" + emailId + '\'' +
+                '}';
     }
 }
