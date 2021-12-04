@@ -8,8 +8,8 @@ public class AddressBook {
         ContactPerson contactPerson = new ContactPerson();
         Map<String, ContactPerson> addressBookHashMap = new HashMap<>();// for unique name and contact
         ArrayList<ContactPerson> record = new ArrayList<>();
-        String name="";
-        int index=0;
+        String name = "";
+        int index = 0;
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
         int status = 1;
@@ -44,7 +44,6 @@ public class AddressBook {
         contactPerson.getAddressbook(addressBookHashMap);//print add address book
 
     }
-
 
 
 }

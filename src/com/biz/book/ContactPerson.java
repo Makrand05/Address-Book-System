@@ -16,11 +16,10 @@ public class ContactPerson {
 
     public ContactPerson() {
 
-
     }
 
     public void addressBook(ArrayList<ContactPerson> contactPerson) {
-        for(int j=0;j<contactPerson.size();j++) {
+        for (int j = 0; j < contactPerson.size(); j++) {
 
             System.out.println("------------------------------------------------");
             System.out.println("First Name : " + contactPerson.get(j).firstName);
@@ -31,23 +30,21 @@ public class ContactPerson {
             System.out.println("Phone Number : " + contactPerson.get(j).phoneNumber);
             System.out.println("Email id : " + contactPerson.get(j).emailId);
             System.out.println("------------------------------------------------");
-
         }
     }
 
     public void updatedata(String name, ArrayList<ContactPerson> record) {
-        for(int i=0;i<record.size();i++) {
+        for (int i = 0; i < record.size(); i++) {
             if (name.equals(record.get(i).firstName)) {
                 record.remove(i);
                 record.add(i, getInput());
             }
-    }
+        }
         System.out.println("Record Update Successfully.......");
-}
+    }
 
     public ContactPerson getInput() {
-
-        ContactPerson addressBookMain1= new ContactPerson();
+        ContactPerson addressBookMain1 = new ContactPerson();
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter the First Name : ");
         addressBookMain1.firstName = sc.next();
@@ -67,31 +64,19 @@ public class ContactPerson {
     }
 
     public void deleteRecord(String name, ArrayList<ContactPerson> record) {
-        if(record.size()>0) {
+        if (record.size() > 0) {
             for (int i = 0; i < record.size(); i++) {
                 if (name.equals(record.get(i).firstName)) {
                     record.remove(i);
                     System.out.println("Record Delete Successfully.......");
-                }
-                else System.out.println("There is no any person contact for "+name);
+                } else System.out.println("There is no any person contact for " + name);
             }
-        }
-        else System.out.println("There is no any person address to delete");
-
+        } else System.out.println("There is no any person address to delete");
     }
-
-    public Dictionary<String, ContactPerson> getInput(Dictionary<String, ContactPerson> dictionary) {
-        ContactPerson contactPerson=new ContactPerson();
-        System.out.println("Enter Name for dictionary");
-        String s=(new Scanner(System.in)).next();
-        dictionary.put(s,contactPerson.getInput());
-        return dictionary;
-    }
-
 
     public void getAddressbook(Map<String, ContactPerson> addressBookHashMap) {
-        for(String addressbook:addressBookHashMap.keySet()){
-            System.out.println("Person contact for the "+addressbook.toString()+" is "+addressBookHashMap.get(addressbook).toString());
+        for (String addressbook : addressBookHashMap.keySet()) {
+            System.out.println("Person contact for the " + addressbook.toString() + " is " + addressBookHashMap.get(addressbook).toString());
         }
     }
 
