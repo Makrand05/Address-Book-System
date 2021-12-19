@@ -12,7 +12,7 @@ public class AddressBookClass {
 
         String addressBookName;
         Map<String, ArrayList<ContactPerson>> addressBookHashMap = new HashMap<>();
-
+        ArrayList arrayList=null;
         boolean flag = true;
 
         while (flag) {
@@ -25,13 +25,18 @@ public class AddressBookClass {
                 case 1:
                     System.out.println("Enter Address book Name");
                     addressBookName = sc.next();
-                    addressBookHashMap.put(addressBookName, null);
+                    addressBookHashMap.put(addressBookName,null);
                     break;
                 case 2:
                     System.out.println("Enter Address book Name for Edit");
                     addressBookName = sc.next();
-                    ContactList.editAddressBook();
-                    addressBookHashMap.put(addressBookName, ContactList.editAddressBook());
+                    arrayList=ContactList.editAddressBook();
+                    if(addressBookHashMap.get(addressBookName)!=null)
+                    {
+                        ArrayList temp=addressBookHashMap.get(addressBookName);
+                        arrayList.add(temp);
+                    }
+                    addressBookHashMap.put(addressBookName,arrayList);
                     break;
                 case 3:
                     System.out.println("Enter Address book Name for Delete...");
@@ -40,9 +45,10 @@ public class AddressBookClass {
                     break;
                 case 4:
                     System.out.println("Address Bool List");
+                    //System.out.println(addressBookHashMap);
                     for(String name:addressBookHashMap.keySet()){
-                        String value=addressBookHashMap.get(name).toString();
-                        System.out.println(name+" --> "+value);
+                       String value=addressBookHashMap.get(name).toString();
+                       System.out.println(name+" --> "+value);
                     }
                     break;
                 case 0:

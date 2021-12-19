@@ -3,9 +3,10 @@ package com.biz.book;
 import java.util.*;
 
 public class ContactList {
-    public static ArrayList<ContactPerson> record = new ArrayList<>();
+
 
     public static ArrayList<ContactPerson> editAddressBook() {
+       ArrayList<ContactPerson> record = new ArrayList<>();
         //System.out.println("Welcome to Address Book Program");
         ContactPerson contactPerson = new ContactPerson();
         String name = "";
