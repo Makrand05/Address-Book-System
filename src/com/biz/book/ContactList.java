@@ -6,12 +6,14 @@ public class ContactList {
 
 
     public static ArrayList<ContactPerson> editAddressBook() {
-       ArrayList<ContactPerson> record = new ArrayList<>();
+        ArrayList<ContactPerson> record = new ArrayList<>();
         //System.out.println("Welcome to Address Book Program");
         ContactPerson contactPerson = new ContactPerson();
-        String name = "";
+        ArrayList contact;
+        String name;
+
         Scanner sc = new Scanner(System.in);
-        boolean flag = true;
+        boolean flag = true, fg = false;
         int status = 1;
         while (flag) {
             System.out.println("------------------------Contact List---------------------");
@@ -20,7 +22,23 @@ public class ContactList {
             status = sc.nextInt();
             switch (status) {
                 case 1:
-                    record.add(contactPerson.getInput());//adding the new contact in address book
+                    int flag1 = 0;
+                    ContactPerson newContact = contactPerson.getInput();
+                    if (record.isEmpty()) {
+                        flag1=0;
+                    } else {
+                        for(ContactPerson cp : record) //for (int i = 0; i < record.size(); i++) {
+                        {
+                            if(cp.firstName.equals(newContact.firstName)) {
+                                System.out.println("Contact person is already present");
+                                //record.set(i, newContact);
+                                flag1 = 1;
+                                break;
+                            }
+                        }
+                    }
+                    if (flag1 == 0)
+                        record.add(newContact);//adding the new contact in address book
                     break;
                 case 2:
                     System.out.println("Enter first name that you want to edit record");
