@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Function;
 
 public class ContactPerson {
     String firstName;
     String lastName;
     String address;
     String city;
+    String state;
     int zip;
     long phoneNumber;
     String emailId;
@@ -18,18 +20,35 @@ public class ContactPerson {
 
     }
 
-    public void addressBook(ArrayList<ContactPerson> contactPerson) {
-        for (int j = 0; j < contactPerson.size(); j++) {
+    public ContactPerson(String firstName, String lastName, String address, String city, String state, int zip, long phoneNumber, String emailId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phoneNumber = phoneNumber;
+        this.emailId = emailId;
+    }
 
-            System.out.println("------------------------------------------------");
-            System.out.println("First Name : " + contactPerson.get(j).firstName);
-            System.out.println("Last Name : " + contactPerson.get(j).lastName);
-            System.out.println("Address : " + contactPerson.get(j).address);
-            System.out.println("City Name : " + contactPerson.get(j).city);
-            System.out.println("Zip code : " + contactPerson.get(j).zip);
-            System.out.println("Phone Number : " + contactPerson.get(j).phoneNumber);
-            System.out.println("Email id : " + contactPerson.get(j).emailId);
-            System.out.println("------------------------------------------------");
+    public void addressBook(ArrayList<ContactPerson> contactPerson) {
+
+        System.out.println("------------------------------------------------------------------------------------------------");
+        System.out.printf("%10s %10s %20s %10s %10s %10s %10s %10s", "First Name", "Last Name", "Address", "City ","state,", "Pin Code", "Phone Number", "Email");
+        System.out.println();
+        System.out.println("------------------------------------------------------------------------------------------------");
+        for (int j = 0; j < contactPerson.size(); j++) {
+            System.out.format("%10s %10s %20s %10s %10s %10s %10s"
+                    , contactPerson.get(j).firstName
+                    , contactPerson.get(j).lastName
+                    , contactPerson.get(j).address
+                    , contactPerson.get(j).city
+                    , contactPerson.get(j).state
+                    , contactPerson.get(j).zip
+                    , contactPerson.get(j).phoneNumber
+                    , contactPerson.get(j).emailId);
+
+            System.out.println();
         }
     }
 
@@ -54,6 +73,8 @@ public class ContactPerson {
         addressBookMain1.address = sc.next();
         System.out.print("Enter the City Name : ");
         addressBookMain1.city = sc.next();
+        System.out.print("Enter the State Name : ");
+        addressBookMain1.state = sc.next();
         System.out.print("Enter the zip code : ");
         addressBookMain1.zip = sc.nextInt();
         System.out.print("Enter the Phone number : ");
@@ -87,6 +108,7 @@ public class ContactPerson {
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
                 ", zip=" + zip +
                 ", phoneNumber=" + phoneNumber +
                 ", emailId='" + emailId + '\'' +

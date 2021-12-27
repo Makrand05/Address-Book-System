@@ -1,9 +1,10 @@
 package com.biz.book;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AddressBookClass {
     public static void main(String[] args) {
@@ -12,33 +13,38 @@ public class AddressBookClass {
 
         String addressBookName;
         Map<String, ArrayList<ContactPerson>> addressBookHashMap = new HashMap<>();
-        ArrayList arrayList=null;
+        //tesing data
+       // addressBookHashMap = TestMain.setData();
+        ArrayList arrayList = null;
         boolean flag = true;
 
         while (flag) {
 
             System.out.println("------------------------Address Book--------------------");
             System.out.println("1 - Add more Address Book  \n2 - Edit Address Book \n3 - Delete Address Book \n4 - Show AddressBook " +
+                    "\n5 - Search Using City or State" +
+                    "\n6- City wise data" +
                     "\n0 -  for exit \nEnter your Choice.....");
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
                     System.out.println("Enter Address book Name");
                     addressBookName = sc.next();
-                    addressBookHashMap.put(addressBookName,null);
+                    addressBookHashMap = new HashMap<>();
+
+
                     break;
                 case 2:
                     System.out.println("Enter Address book Name for Edit");
                     addressBookName = sc.next();
-                    arrayList=ContactList.editAddressBook();
-                    if(addressBookHashMap.get(addressBookName)!=null)
-                    {
+                    arrayList = ContactList.editAddressBook();
+                    if (addressBookHashMap.get(addressBookName) != null) {
                         //ArrayList temp=addressBookHashMap.get(addressBookName);
                         arrayList.add(addressBookHashMap.get(addressBookName));
-                       // temp.add(arrayList);
+                        // temp.add(arrayList);
 
                     }
-                    addressBookHashMap.put(addressBookName,arrayList);
+                    addressBookHashMap.put(addressBookName, arrayList);
                     break;
                 case 3:
                     System.out.println("Enter Address book Name for Delete...");
@@ -48,10 +54,15 @@ public class AddressBookClass {
                 case 4:
                     System.out.println("Address Bool List");
                     //System.out.println(addressBookHashMap);
-                    for(String name:addressBookHashMap.keySet()){
-                       String value=addressBookHashMap.get(name).toString();
-                       System.out.println(name+" --> "+value);
-                    }
+                    printAddressBookHashMap(addressBookHashMap);
+                    break;
+                case 5:
+                    System.out.print("Enter City name : ");
+                    searchRecord((new Scanner(System.in).next()), addressBookHashMap);
+                    break;
+                case 6:
+                    //Map<String, ContactPerson> temp = cityStateWiseData(addressBookHashMap);
+                  //  System.out.println(temp);
                     break;
                 case 0:
                     flag = false;
@@ -63,5 +74,27 @@ public class AddressBookClass {
         }
 
 
+    }
+
+    private static void printAddressBookHashMap(Map<String, ArrayList<ContactPerson>> addressBookHashMap) {
+        for (String name : addressBookHashMap.keySet()) {
+            String value = addressBookHashMap.get(name).toString();
+            System.out.println(name + " --> " + value);
+        }
+    }
+
+
+//Search the data form using City name and state name
+    private static void searchRecord(String cityName, Map<String, ArrayList<ContactPerson>> addressBookHashMap) {
+        addressBookHashMap
+                .values()
+                .stream().
+                forEach(value -> {
+                            value.stream()
+                            .forEach(person -> {
+                            if (person.city.equals(cityName) || person.state.equals(cityName))
+                                    System.out.println(person);
+                            });
+                });
     }
 }

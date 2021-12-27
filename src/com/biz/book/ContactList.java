@@ -17,7 +17,9 @@ public class ContactList {
         int status = 1;
         while (flag) {
             System.out.println("------------------------Contact List---------------------");
-            System.out.print("1 - Add more contact \n2 - Edit Contact \n3 - Delete person Contact \n4 - Show AddressBook " +
+            System.out.print("1 - Add more contact \n2 - Edit Contact \n3 - Delete person Contact " +
+                    "\n4 - Show AddressBook " +
+
                     "\n0 -  for exit \nEnter your Choice.....");
             status = sc.nextInt();
             switch (status) {
@@ -54,6 +56,7 @@ public class ContactList {
                     System.out.println("Size of record : " + record.size());
                     contactPerson.addressBook(record);// print all contact from the address book
                     break;
+
                 case 0:
                     flag = false;//exit from loop
                     break;
