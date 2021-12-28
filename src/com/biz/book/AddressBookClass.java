@@ -1,10 +1,9 @@
 package com.biz.book;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collector;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 public class AddressBookClass {
     public static void main(String[] args) {
@@ -14,7 +13,8 @@ public class AddressBookClass {
         String addressBookName;
         Map<String, ArrayList<ContactPerson>> addressBookHashMap = new HashMap<>();
         //tesing data
-       // addressBookHashMap = TestMain.setData();
+
+        addressBookHashMap = TestMain1.setData();
         ArrayList arrayList = null;
         boolean flag = true;
 
@@ -57,12 +57,15 @@ public class AddressBookClass {
                     printAddressBookHashMap(addressBookHashMap);
                     break;
                 case 5:
-                    System.out.print("Enter City name : ");
+                    System.out.print("Enter City or State name : ");
                     searchRecord((new Scanner(System.in).next()), addressBookHashMap);
                     break;
                 case 6:
-                    //Map<String, ContactPerson> temp = cityStateWiseData(addressBookHashMap);
-                  //  System.out.println(temp);
+                    System.out.print("Enter City or State name : ");
+                    Map<String, ContactPerson> cityStateMap = cityStateWiseData((new Scanner(System.in).next()), addressBookHashMap);
+                    for (String cityCount : cityStateMap.keySet()) {
+                        System.out.println(cityCount + " - " + cityStateMap.get(cityCount));
+                    }
                     break;
                 case 0:
                     flag = false;
@@ -83,6 +86,20 @@ public class AddressBookClass {
         }
     }
 
+    private static Map<String, ContactPerson> cityStateWiseData(String cityStateName, Map<String, ArrayList<ContactPerson>> addressBookHashMap) {
+        Map<String, ContactPerson> commonCityName = new HashMap<>();
+
+        AtomicInteger cityCounter = new AtomicInteger(1);
+        addressBookHashMap
+                .values()
+                .forEach(value -> {
+                    value.forEach(person -> {
+                                if (person.city.equals(cityStateName) || person.state.equals(cityStateName))
+                                    commonCityName.put((cityCounter.getAndIncrement() + ""), person);
+                            });
+                });
+        return commonCityName;
+    }
 
 //Search the data form using City name and state name
     private static void searchRecord(String cityName, Map<String, ArrayList<ContactPerson>> addressBookHashMap) {
