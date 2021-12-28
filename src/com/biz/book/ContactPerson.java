@@ -12,8 +12,8 @@ public class ContactPerson {
     String address;
     String city;
     String state;
-    int zip;
-    long phoneNumber;
+    Integer zip;
+    Long phoneNumber;
     String emailId;
 
     public ContactPerson() {

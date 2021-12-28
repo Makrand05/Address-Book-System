@@ -26,11 +26,11 @@ public class ContactList {
                     int flag1 = 0;
                     ContactPerson newContact = contactPerson.getInput();
                     if (record.isEmpty()) {
-                        flag1=0;
+                        flag1 = 0;
                     } else {
-                        for(ContactPerson cp : record) //for (int i = 0; i < record.size(); i++) {
+                        for (ContactPerson cp : record) //for (int i = 0; i < record.size(); i++) {
                         {
-                            if(cp.firstName.equals(newContact.firstName)) {
+                            if (cp.firstName.equals(newContact.firstName)) {
                                 System.out.println("Contact person is already present");
                                 //record.set(i, newContact);
                                 flag1 = 1;
