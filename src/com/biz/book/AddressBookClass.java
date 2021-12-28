@@ -2,7 +2,7 @@ package com.biz.book;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
+
 
 
 public class AddressBookClass {
@@ -14,7 +14,7 @@ public class AddressBookClass {
         Map<String, ArrayList<ContactPerson>> addressBookHashMap = new HashMap<>();
         //tesing data
 
-        addressBookHashMap = TestMain1.setData();
+       // addressBookHashMap = TestMain1.setData();
         ArrayList arrayList = null;
         boolean flag = true;
 
@@ -73,10 +73,7 @@ public class AddressBookClass {
                 default:
                     System.out.println("Please enter valid input");
             }
-
         }
-
-
     }
 
     private static void printAddressBookHashMap(Map<String, ArrayList<ContactPerson>> addressBookHashMap) {
