@@ -13,7 +13,7 @@ public class AddressBookClass {
         Map<String, ArrayList<ContactPerson>> addressBookHashMap = new HashMap<>();
         //tesing data
 
-       addressBookHashMap = TestMain.setData();
+      // addressBookHashMap = TestMain.setData();
         ArrayList arrayList = null;
         boolean flag = true;
         while (flag) {
