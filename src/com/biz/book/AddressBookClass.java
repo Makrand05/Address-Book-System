@@ -2,9 +2,6 @@ package com.biz.book;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-
-
-
 public class AddressBookClass {
     public static void main(String[] args) {
         System.out.println("Welcome to Address Book Program");
@@ -14,16 +11,15 @@ public class AddressBookClass {
         Map<String, ArrayList<ContactPerson>> addressBookHashMap = new HashMap<>();
         //tesing data
 
-       // addressBookHashMap = TestMain1.setData();
+       //addressBookHashMap = TestMain.setData();
         ArrayList arrayList = null;
         boolean flag = true;
-
         while (flag) {
-
             System.out.println("------------------------Address Book--------------------");
             System.out.println("1 - Add more Address Book  \n2 - Edit Address Book \n3 - Delete Address Book \n4 - Show AddressBook " +
                     "\n5 - Search Using City or State" +
-                    "\n6- City wise data" +
+                    "\n6 - City wise data "+
+                    "\n7 - Enter the city/state name " +
                     "\n0 -  for exit \nEnter your Choice.....");
             int choice = sc.nextInt();
             switch (choice) {
@@ -31,8 +27,6 @@ public class AddressBookClass {
                     System.out.println("Enter Address book Name");
                     addressBookName = sc.next();
                     addressBookHashMap = new HashMap<>();
-
-
                     break;
                 case 2:
                     System.out.println("Enter Address book Name for Edit");
@@ -42,7 +36,6 @@ public class AddressBookClass {
                         //ArrayList temp=addressBookHashMap.get(addressBookName);
                         arrayList.add(addressBookHashMap.get(addressBookName));
                         // temp.add(arrayList);
-
                     }
                     addressBookHashMap.put(addressBookName, arrayList);
                     break;
@@ -67,6 +60,10 @@ public class AddressBookClass {
                         System.out.println(cityCount + " - " + cityStateMap.get(cityCount));
                     }
                     break;
+                case 7:
+                    System.out.print("Enter City or State name : ");
+                    int numberOfContact=countOfContact((new Scanner(System.in).next()),addressBookHashMap);
+                    System.out.println("Total number of contact in given City is : "+numberOfContact);
                 case 0:
                     flag = false;
                     break;
@@ -74,6 +71,19 @@ public class AddressBookClass {
                     System.out.println("Please enter valid input");
             }
         }
+    }
+
+    private static int countOfContact(String cityStateName, Map<String, ArrayList<ContactPerson>> addressBookHashMap) {
+        AtomicInteger cityCounter = new AtomicInteger();
+        addressBookHashMap
+                .values()
+                .forEach(value -> {
+                    value.forEach(person -> {
+                        if (person.city.equals(cityStateName) || person.state.equals(cityStateName))
+                            cityCounter.getAndIncrement();
+                    });
+                });
+        return cityCounter.get();
     }
 
     private static void printAddressBookHashMap(Map<String, ArrayList<ContactPerson>> addressBookHashMap) {

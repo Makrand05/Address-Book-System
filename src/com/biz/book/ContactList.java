@@ -19,7 +19,6 @@ public class ContactList {
             System.out.println("------------------------Contact List---------------------");
             System.out.print("1 - Add more contact \n2 - Edit Contact \n3 - Delete person Contact " +
                     "\n4 - Show AddressBook " +
-
                     "\n0 -  for exit \nEnter your Choice.....");
             status = sc.nextInt();
             switch (status) {
