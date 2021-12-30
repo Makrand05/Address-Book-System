@@ -1,11 +1,17 @@
 package com.biz.book;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 public class ContactList {
 
 
-    public static ArrayList<ContactPerson> editAddressBook() {
+    public static ArrayList<ContactPerson> editAddressBook() throws IOException {
         ArrayList<ContactPerson> record = new ArrayList<>();
         //System.out.println("Welcome to Address Book Program");
         ContactPerson contactPerson = new ContactPerson();
@@ -40,6 +46,7 @@ public class ContactList {
                     }
                     if (flag1 == 0)
                         record.add(newContact);//adding the new contact in address book
+
                     break;
                 case 2:
                     System.out.println("Enter first name that you want to edit record");

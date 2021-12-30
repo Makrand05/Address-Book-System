@@ -1,19 +1,24 @@
 package com.biz.book;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class AddressBookClass {
-    public static void main(String[] args) {
+    private static  final String PATH = "C:\\Users\\MS\\IdeaProjects\\AddressBookSystem\\resources\\Addressbook";
+    public static void main(String[] args) throws IOException {
         System.out.println("Welcome to Address Book Program");
         Scanner sc = new Scanner(System.in);
-
         String addressBookName;
         Map<String, ArrayList<ContactPerson>> addressBookHashMap = new HashMap<>();
-        //tesing data
 
         //addressBookHashMap = TestMain.setData();
+
         ArrayList arrayList = null;
         boolean flag = true;
         while (flag) {
@@ -34,6 +39,7 @@ public class AddressBookClass {
                     System.out.println("Enter Address book Name");
                     addressBookName = sc.next();
                     addressBookHashMap = new HashMap<>();
+                    //Files.createFile(Paths.get(path + "/" + addressBookName + ".txt"));
                     break;
                 case 2:
                     System.out.println("Enter Address book Name for Edit");
@@ -44,7 +50,18 @@ public class AddressBookClass {
                         arrayList.add(addressBookHashMap.get(addressBookName));
                         // temp.add(arrayList);
                     }
+
+
+                    Path fileName= Paths.get( PATH+ "/"+addressBookName+".txt");
+                    System.out.println(fileName);
+                    if(Files.notExists(fileName)){
+                        Files.createFile(fileName);
+                        List<String> s=Arrays.asList(arrayList.toString());
+                        Files.write(fileName,s, StandardOpenOption.APPEND);
+                    }
+
                     addressBookHashMap.put(addressBookName, arrayList);
+
                     break;
                 case 3:
                     System.out.println("Enter Address book Name for Delete...");
@@ -132,10 +149,18 @@ public class AddressBookClass {
         return cityCounter.get();
     }
 
-    private static void printAddressBookHashMap(Map<String, ArrayList<ContactPerson>> addressBookHashMap) {
+    private static void printAddressBookHashMap(Map<String, ArrayList<ContactPerson>> addressBookHashMap) throws IOException {
         for (String name : addressBookHashMap.keySet()) {
-            String value = addressBookHashMap.get(name).toString();
-            System.out.println(name + " --> " + value);
+
+        Path fileName= Paths.get(PATH + "/"+name+".txt");
+            List<String> list = Files.readAllLines(fileName);
+
+            for (String bookData:list)
+            {
+                System.out.println(bookData);
+            }
+
+
         }
     }
 
