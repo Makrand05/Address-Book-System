@@ -1,13 +1,13 @@
 package com.biz.book;
 
+import com.google.gson.Gson;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -63,6 +63,11 @@ public class AddressBookClass {
 
                     //Write data in CSV file
                     writeAddressBookIntoCsvFile(addressBookName, arrayList);
+                    //Write data in JSON file
+
+                    writeAddressBookIntoJSONFile(addressBookName,arrayList);
+
+                    //store data in the Addressbook map
                     addressBookHashMap.put(addressBookName, arrayList);
 
                     break;
@@ -114,9 +119,25 @@ public class AddressBookClass {
         }
     }
 
+    private static void writeAddressBookIntoJSONFile(String addressBookName, ArrayList arrayList) throws IOException {
+        String jsonFile=(PATH + "/" + addressBookName + ".json");
+        Gson gson= new Gson();
+        String json=gson.toJson(arrayList);
+
+        if (Files.notExists(Paths.get(jsonFile))) {
+            Files.createFile(Paths.get(jsonFile));
+            FileWriter writer=new FileWriter(jsonFile);
+            writer.write(json);
+            writer.close();
+        }
+
+
+
+    }
+
     private static void writeDataIntoFileNio(String addressBookName, ArrayList arrayList) throws IOException {
         Path fileName = Paths.get(PATH + "/" + addressBookName + ".txt");
-        System.out.println(fileName);
+        //System.out.println(fileName);
         if (Files.notExists(fileName)) {
             Files.createFile(fileName);
             List<String> s = Arrays.asList(arrayList.toString());
@@ -197,6 +218,14 @@ public class AddressBookClass {
             for (String bookData : list) {
                 System.out.println(bookData);
             }
+        }
+        System.out.println("---------------------Contacts from the JSON file --------------------------");
+        for (String name : addressBookHashMap.keySet()) {
+            String jsonFile = (String) (PATH + "/" + name + ".json");
+            BufferedReader br = new BufferedReader(new FileReader(jsonFile));
+            Gson gson = new Gson();
+            ContactPerson contactPerson[] = gson.fromJson(br, ContactPerson[].class);
+            System.out.println(Arrays.asList(contactPerson));
         }
     }
 

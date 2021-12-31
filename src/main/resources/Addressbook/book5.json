@@ -1,0 +1,42 @@
+[
+  {
+    "firstName": "Rahul",
+    "lastName": "abc",
+    "address": "Pune",
+    "city": "Pune",
+    "state": "maharashtra",
+    "zip": 12345,
+    "phoneNumber": 12345,
+    "emailId": "rahul@gmail.com"
+  },
+  {
+    "firstName": "Ram",
+    "lastName": "PQR",
+    "address": "Mumbai",
+    "city": "Mumbai",
+    "state": "maharashtra",
+    "zip": 567890,
+    "phoneNumber": 56789,
+    "emailId": "ram@pqr.com"
+  },
+  {
+    "firstName": "Shaam",
+    "lastName": "xyz",
+    "address": "Nagpur",
+    "city": "nagpur",
+    "state": "MP",
+    "zip": 12345,
+    "phoneNumber": 67890,
+    "emailId": "shaam@xyz.com"
+  },
+  {
+    "firstName": "Raju",
+    "lastName": "PQR",
+    "address": "Mumbai",
+    "city": "Mumbai",
+    "state": "MP",
+    "zip": 567890,
+    "phoneNumber": 56789,
+    "emailId": "ram@pqr.com"
+  }
+]
