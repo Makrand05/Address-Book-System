@@ -1,6 +1,13 @@
 package com.biz.book;
 
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 import java.io.IOException;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,8 +17,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class AddressBookClass {
-    private static  final String PATH = "C:\\Users\\MS\\IdeaProjects\\AddressBookSystem\\resources\\Addressbook";
-    public static void main(String[] args) throws IOException {
+    private static final String PATH = "C:\\Users\\MS\\IdeaProjects\\AddressBookSystem\\src\\main\\resources\\Addressbook";
+
+    public static void main(String[] args) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
         System.out.println("Welcome to Address Book Program");
         Scanner sc = new Scanner(System.in);
         String addressBookName;
@@ -51,15 +59,10 @@ public class AddressBookClass {
                         // temp.add(arrayList);
                     }
 
+                    writeDataIntoFileNio(addressBookName, arrayList);//Write data into the file using nio pac
 
-                    Path fileName= Paths.get( PATH+ "/"+addressBookName+".txt");
-                    System.out.println(fileName);
-                    if(Files.notExists(fileName)){
-                        Files.createFile(fileName);
-                        List<String> s=Arrays.asList(arrayList.toString());
-                        Files.write(fileName,s, StandardOpenOption.APPEND);
-                    }
-
+                    //Write data in CSV file
+                    writeAddressBookIntoCsvFile(addressBookName, arrayList);
                     addressBookHashMap.put(addressBookName, arrayList);
 
                     break;
@@ -111,6 +114,30 @@ public class AddressBookClass {
         }
     }
 
+    private static void writeDataIntoFileNio(String addressBookName, ArrayList arrayList) throws IOException {
+        Path fileName = Paths.get(PATH + "/" + addressBookName + ".txt");
+        System.out.println(fileName);
+        if (Files.notExists(fileName)) {
+            Files.createFile(fileName);
+            List<String> s = Arrays.asList(arrayList.toString());
+            Files.write(fileName, s, StandardOpenOption.APPEND);
+        }
+    }
+
+    private static void writeAddressBookIntoCsvFile(String addressBookName, ArrayList arrayList) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
+
+        Path csvFile = Paths.get(PATH + "/" + addressBookName + ".csv");
+        Writer writer = Files.newBufferedWriter(csvFile);
+        StatefulBeanToCsv<ContactPerson> beanToCSV = new StatefulBeanToCsvBuilder<ContactPerson>(writer)
+                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+                .build();
+        for (Object cp : arrayList) {
+            beanToCSV.write((ContactPerson) cp);
+        }
+        writer.close();
+
+    }
+
     private static void sortAddressBookCityStateZip(int option, List<ContactPerson> contact) {
         List<ContactPerson> listObject = null;
         if (option == 1) {
@@ -150,17 +177,26 @@ public class AddressBookClass {
     }
 
     private static void printAddressBookHashMap(Map<String, ArrayList<ContactPerson>> addressBookHashMap) throws IOException {
+        System.out.println("-----------------Contact from the txt files ---------------------------");
         for (String name : addressBookHashMap.keySet()) {
 
-        Path fileName= Paths.get(PATH + "/"+name+".txt");
+            Path fileName = Paths.get(PATH + "/" + name + ".txt");
             List<String> list = Files.readAllLines(fileName);
 
-            for (String bookData:list)
-            {
+            for (String bookData : list) {
                 System.out.println(bookData);
             }
+        }
+        System.out.println("---------------------Contact from the CSV files ------------------------");
+        //Print data from the CSV file
+        for (String name : addressBookHashMap.keySet()) {
 
+            Path fileName = Paths.get(PATH + "/" + name + ".csv");
+            List<String> list = Files.readAllLines(fileName);
 
+            for (String bookData : list) {
+                System.out.println(bookData);
+            }
         }
     }
 
