@@ -1,4 +1,6 @@
-package com.biz.book;
+package com.biz.book.jinterface;
+
+import com.biz.book.service.ContactPerson;
 
 import java.util.List;
 

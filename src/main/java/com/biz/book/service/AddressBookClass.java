@@ -1,5 +1,6 @@
-package com.biz.book;
+package com.biz.book.service;
 
+import com.biz.book.model.ContactList;
 import com.google.gson.Gson;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;
@@ -263,6 +264,11 @@ public class AddressBookClass {
                 continue;
             }
 
+        }
+
+        System.out.println("---------------------All Data --------------------------");
+        for (String bookName: addressBookHashMap.keySet()) {
+            System.out.println(bookName+" -- "+addressBookHashMap.get(bookName));
         }
     }
 

@@ -1,20 +1,22 @@
-package com.biz.book;
+package com.biz.book.model;
+
+import com.biz.book.service.ContactPerson;
+import com.biz.book.service.DBService;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 public class ContactList {
 
-
+    public static void main(String[] args) throws IOException {
+        editAddressBook();
+    }
     public static ArrayList<ContactPerson> editAddressBook() throws IOException {
         ArrayList<ContactPerson> record = new ArrayList<>();
         //System.out.println("Welcome to Address Book Program");
         ContactPerson contactPerson = new ContactPerson();
+        DBService dbService=new DBService();
+
         ArrayList contact;
         String name;
 
@@ -23,13 +25,15 @@ public class ContactList {
         int status = 1;
         while (flag) {
             System.out.println("------------------------Contact List---------------------");
-            System.out.print("1 - Add more contact \n2 - Edit Contact \n3 - Delete person Contact " +
-                    "\n4 - Show AddressBook " +
+            System.out.print("1 - Add more contact " +
+                    "\n2 - Edit Contact " +
+                    "\n3 - Delete person Contact " +
+                    "\n4 - Show Contact List " +
                     "\n0 -  for exit \nEnter your Choice.....");
-            //  status = sc.nextInt();
-            status = sc.next().charAt(0);
+              status = sc.nextInt();
+//            status = sc.next().charAt(0);
 
-            if (Character.isDigit(status)) {
+            //if (Character.isDigit(status)) {
                 switch (status) {
                     case 1:
                         int flag1 = 0;
@@ -48,7 +52,7 @@ public class ContactList {
                             }
                         }
                         if (flag1 == 0)
-                            record.add(newContact);//adding the new contact in address book
+                            record.add(newContact);//adding the new contact in Contact List
 
                         break;
                     case 2:
@@ -69,8 +73,8 @@ public class ContactList {
                     case 0:
                         flag = false;//exit from loop
                         break;
-                }
-            } else System.out.println("Please Enter valid input format");
+//                }
+            } //else System.out.println("Please Enter valid input format");
         }
         return record;
     }
