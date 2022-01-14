@@ -37,5 +37,13 @@ public class AddressBookTest {
         Assert.assertEquals(5,actualResult);
 
     }
+    // UC 19
+    @Test
+    public void givenCity_whenPresent_shouldReturnCount() {
+        DBService dbService = new DBService();
+        int actualResult= dbService.getCountCitis("Mumbai");
+        Assert.assertEquals(3,actualResult);
+
+    }
 
 }

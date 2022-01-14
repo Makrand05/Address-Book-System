@@ -132,4 +132,22 @@ public class DBService {
         }
         return contactList;
     }
+
+    public int getCountCitis(String cityName) {
+        try (Connection connection = databaseConnection.getConnection()) {
+
+            String sqlQuery = "select count(city) from address_book where city='" + cityName+"';";
+            Statement statement = connection.prepareStatement(sqlQuery);
+
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
+            while (resultSet.next()) {
+                return (resultSet.getInt(1));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+
+    }
 }
