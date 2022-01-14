@@ -2,6 +2,7 @@ package com.biz.book.model;
 
 import com.biz.book.service.ContactPerson;
 import com.biz.book.service.DBService;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.*;
@@ -38,6 +39,7 @@ public class ContactList {
                     case 1:
                         int flag1 = 0;
                         ContactPerson newContact = contactPerson.getInput();
+                        dbService.addDataInDatabase(newContact);
                         if (record.isEmpty()) {
                             flag1 = 0;
                         } else {
@@ -53,7 +55,6 @@ public class ContactList {
                         }
                         if (flag1 == 0)
                             record.add(newContact);//adding the new contact in Contact List
-
                         break;
                     case 2:
                         System.out.println("Enter first name that you want to edit record");

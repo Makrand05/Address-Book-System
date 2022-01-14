@@ -1,6 +1,7 @@
 package com.biz.book.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -13,6 +14,16 @@ public class ContactPerson {
     Integer zip;
     Long phoneNumber;
     String emailId;
+    Date dateAdded;
+
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
     private int id;
 
     public ContactPerson() {

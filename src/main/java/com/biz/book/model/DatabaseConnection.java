@@ -10,7 +10,7 @@ public class DatabaseConnection {
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("Driver loaded");
+
             String JDBCURL = "jdbc:mysql://127.0.0.1:3308/address_book_system";
             connection = DriverManager.getConnection(JDBCURL, "root", "root");
 
@@ -21,8 +21,4 @@ public class DatabaseConnection {
         return connection;
     }
 
-    public static void main(String[] args) {
-        DatabaseConnection db=new DatabaseConnection();
-        db.getConnection();
-    }
 }
