@@ -46,4 +46,14 @@ public class AddressBookTest {
 
     }
 
+    @Test
+    public void givenContact_whenAdd_shouldReturnStatus() {
+        DBService dbService = new DBService();
+        boolean actualResult= dbService.addDataInDatabase(
+                new ContactPerson("Makrand","Shingare","Velapur","Solapur","Maharashtra",413113,9096592086L,"makrand@gmail.com")
+                );
+        Assert.assertTrue(actualResult);
+
+    }
+
 }

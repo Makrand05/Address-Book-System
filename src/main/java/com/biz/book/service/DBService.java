@@ -75,7 +75,7 @@ public class DBService {
 
     }
 
-    public void addDataInDatabase(ContactPerson contact) {
+    public boolean addDataInDatabase(ContactPerson contact) {
         try (Connection connection = databaseConnection.getConnection()) {
 
             String sqlQuery = "insert into address_book(first_name,last_name,address,city,state,zip,phone_number,email,date_added)" +
@@ -99,15 +99,16 @@ public class DBService {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return false;
         }
-
+        return true;
     }
 
 
     public List<ContactPerson> getCountBetDates(String startDate, String endDate) {
         List<ContactPerson> contactList = new ArrayList<>();
         try (Connection connection = databaseConnection.getConnection()) {
-            String sqlQuery = "select * from address_book where date_added between '" + startDate + "' and '"+endDate+"'";
+            String sqlQuery = "select * from address_book where date_added between '" + startDate + "' and '" + endDate + "'";
             Statement preparedStatement = connection.prepareStatement(sqlQuery);
 
             ResultSet resultSet = preparedStatement.executeQuery(sqlQuery);
@@ -136,7 +137,7 @@ public class DBService {
     public int getCountCitis(String cityName) {
         try (Connection connection = databaseConnection.getConnection()) {
 
-            String sqlQuery = "select count(city) from address_book where city='" + cityName+"';";
+            String sqlQuery = "select count(city) from address_book where city='" + cityName + "';";
             Statement statement = connection.prepareStatement(sqlQuery);
 
             ResultSet resultSet = statement.executeQuery(sqlQuery);
